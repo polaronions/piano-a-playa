@@ -11,11 +11,16 @@
       fill: blue;
     }
   </style>
+  <script>
+  function playSound() {
+    (new Audio("Piano.mf.C4.mp3")).play()
+  }
+  </script>
 </head>
 
 <body>
   <svg width="483" height="360">
-    <rect fill="white" stroke="black" x="0" y="0" width="69" height="360" />
+    <rect fill="white" stroke="black" x="0" y="0" width="69" height="360" onclick="playSound()" />
     <rect fill="white" stroke="black" x="69" y="0" width="69" height="360" />
     <rect fill="white" stroke="black" x="138" y="0" width="69" height="360" />
     <rect fill="white" stroke="black" x="207" y="0" width="69" height="360" />
