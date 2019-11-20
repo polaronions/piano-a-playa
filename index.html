@@ -12,27 +12,28 @@
     }
   </style>
   <script>
-  function playSound() {
-    (new Audio("Piano.mf.C4.mp3")).play()
-  }
+    function note(noteName) {
+      sound = new Audio(`Piano.mf.${noteName}.mp3`)
+      sound.play()
+    }
   </script>
 </head>
 
 <body>
   <svg width="483" height="360">
-    <rect fill="white" stroke="black" x="0" y="0" width="69" height="360" onclick="playSound()" />
-    <rect fill="white" stroke="black" x="69" y="0" width="69" height="360" />
-    <rect fill="white" stroke="black" x="138" y="0" width="69" height="360" />
-    <rect fill="white" stroke="black" x="207" y="0" width="69" height="360" />
-    <rect fill="white" stroke="black" x="276" y="0" width="69" height="360" />
-    <rect fill="white" stroke="black" x="345" y="0" width="69" height="360" />
-    <rect fill="white" stroke="black" x="414" y="0" width="69" height="360" />
+    <rect onmousedown="note('C4')" fill="white" stroke="black" x="0" y="0" width="69" height="360" />
+    <rect onmousedown="note('D4')" fill="white" stroke="black" x="69" y="0" width="69" height="360" />
+    <rect onmousedown="note('E4')" fill="white" stroke="black" x="138" y="0" width="69" height="360" />
+    <rect onmousedown="note('F4')" fill="white" stroke="black" x="207" y="0" width="69" height="360" />
+    <rect onmousedown="note('G4')" fill="white" stroke="black" x="276" y="0" width="69" height="360" />
+    <rect onmousedown="note('A4')" fill="white" stroke="black" x="345" y="0" width="69" height="360" />
+    <rect onmousedown="note('B4')" fill="white" stroke="black" x="414" y="0" width="69" height="360" />
 
-    <rect fill="black" stroke="black" x="43" y="0" width="39" height="240" />
-    <rect fill="black" stroke="black" x="125" y="0" width="39" height="240" />
-    <rect fill="black" stroke="black" x="246.75" y="0" width="39" height="240" />
-    <rect fill="black" stroke="black" x="324.75" y="0" width="39" height="240" />
-    <rect fill="black" stroke="black" x="404.25" y="0" width="39" height="240" />
+    <rect onmousedown="note('Db4')" fill="black" stroke="black" x="43" y="0" width="39" height="240" />
+    <rect onmousedown="note('Eb4')" fill="black" stroke="black" x="125" y="0" width="39" height="240" />
+    <rect onmousedown="note('Gb4')" fill="black" stroke="black" x="246.75" y="0" width="39" height="240" />
+    <rect onmousedown="note('Ab4')" fill="black" stroke="black" x="324.75" y="0" width="39" height="240" />
+    <rect onmousedown="note('Bb4')" fill="black" stroke="black" x="404.25" y="0" width="39" height="240" />
   </svg>
 </body>
 
