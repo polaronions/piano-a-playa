@@ -16,6 +16,28 @@
       sound = new Audio(`Piano.mf.${noteName}.mp3`)
       sound.play()
     }
+
+    keyToNoteMap = {
+      'a': 'C4',
+      'w': 'Db4',
+      's': 'D4',
+      'e': 'Eb4',
+      'd': 'E4',
+      'f': 'F4',
+      't': 'Gb4',
+      'g': 'G4',
+      'y': 'Ab4',
+      'h': 'A4',
+      'u': 'Bb4',
+      'j': 'B4'
+    };
+
+    document.onkeydown = function(event) {
+      event = event || window.event;
+      if (event.key in keyToNoteMap) {
+        note(keyToNoteMap[event.key])
+      }
+    }
   </script>
 </head>
 
