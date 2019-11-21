@@ -10,6 +10,15 @@
     rect:active {
       fill: blue;
     }
+
+    body {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
   </style>
   <script>
     notes = ['C4', 'Db4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4']
@@ -70,15 +79,8 @@
         noteAndLength = spaceSplit.shift()
         console.log(noteAndLength)
 
-        durationMult = noteAndLength.length
-        // console.log(`durationMult = ${durationMult}`)
-
-        noteVal = noteAndLength[0].toUpperCase() + '4'
-        // console.log(`noteVal = ${noteVal}`)
-
-        playNote(noteVal)
-
-        await sleep(noteMsLength * durationMult)
+        playNote(noteAndLength[0].toUpperCase() + '4')
+        await sleep(noteMsLength * noteAndLength.length)
       }
     }
   </script>
@@ -102,8 +104,6 @@
   </svg>
 
   <button onclick="playSong()">play song</button>
-
-  <!-- <div id="pageLog"></div> -->
 </body>
 
 </html>
