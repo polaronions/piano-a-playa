@@ -36,6 +36,46 @@
       event = event || window.event;
       if (event.key in keyToNoteMap) {
         note(keyToNoteMap[event.key])
+        // console.log(keyToNoteMap[event.key])
+      }
+    }
+
+    // function pageLog(x) {
+    //   document.getElementById('pageLog').innerHTML = x + "<br />" + document.getElementById('pageLog').innerHTML
+    // }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    noteMsLength = 250
+
+    async function playSong() {
+      // console.log('Taking a break...');
+      // await sleep(2000);
+      // console.log('Two seconds later, showing sleep in a loop...');
+      url = new URL(window.location)
+      notes = url.searchParams.get('notes')
+      spaceSplit = notes.split(" ")
+      console.log(`spaceSplit = ${spaceSplit}`)
+      console.log(`spaceSplit.length = ${spaceSplit.length}`)
+
+      // window.prompt("ready to play the song?")
+      await sleep(noteMsLength)
+
+      while (spaceSplit.length > 0) {
+        noteAndLength = spaceSplit.shift()
+        console.log(`noteAndLength = ${noteAndLength}`)
+
+        durationMult = noteAndLength.length
+        console.log(`durationMult = ${durationMult}`)
+
+        noteVal = noteAndLength[0].toUpperCase() + '4'
+        console.log(`noteVal = ${noteVal}`)
+
+        note(noteVal)
+
+        await sleep(noteMsLength * durationMult)
       }
     }
   </script>
@@ -57,6 +97,10 @@
     <rect onmousedown="note('Ab4')" fill="black" stroke="black" x="324.75" y="0" width="39" height="240" />
     <rect onmousedown="note('Bb4')" fill="black" stroke="black" x="404.25" y="0" width="39" height="240" />
   </svg>
+
+  <button onclick="playSong()">play song</button>
+
+  <!-- <div id="pageLog"></div> -->
 </body>
 
 </html>
