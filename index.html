@@ -69,9 +69,14 @@
 
     async function playSong() {
 
-      url = new URL(window.location)
-      notes = url.searchParams.get('notes')
-      spaceSplit = notes.split(" ")
+      textAreaValue = document.getElementById('songText').value
+      textAreaValue = textAreaValue.trim()
+      textAreaValue = textAreaValue.replace(/\n/g, " ")
+      console.log(textAreaValue)
+
+      // url = new URL(window.location)
+      // notes = url.searchParams.get('notes')
+      spaceSplit = textAreaValue.split(" ")
 
       await sleep(noteMsLength)
 
@@ -83,10 +88,28 @@
         await sleep(noteMsLength * noteAndLength.length)
       }
     }
+
+    function fillTextArea() {
+      const nullOrValue = localStorage.getItem("textAreaValue")
+      localStorage.removeItem("textAreaValue")
+
+      if (nullOrValue === null) {
+        document.getElementById('songText').value = (new URL(window.location)).searchParams.get('notes')
+      } else {
+        document.getElementById('songText').value = nullOrValue
+      }
+    }
+
+    window.addEventListener("beforeunload", () => {
+      textAreaValue = document.getElementById('songText').value
+      if (textAreaValue !== "") {
+        localStorage.setItem("textAreaValue", document.getElementById('songText').value)
+      }
+    })
   </script>
 </head>
 
-<body>
+<body onload="fillTextArea()">
   <svg width="483" height="360">
     <rect onmousedown="playNote('C4')" fill="white" stroke="black" x="0" y="0" width="69" height="360" />
     <rect onmousedown="playNote('D4')" fill="white" stroke="black" x="69" y="0" width="69" height="360" />
@@ -102,7 +125,9 @@
     <rect onmousedown="playNote('Ab4')" fill="black" stroke="black" x="324.75" y="0" width="39" height="240" />
     <rect onmousedown="playNote('Bb4')" fill="black" stroke="black" x="404.25" y="0" width="39" height="240" />
   </svg>
-
+  <br />
+  <textarea cols="60" rows="10" id="songText"></textarea>
+  <br />
   <button onclick="playSong()">play song</button>
 </body>
 
