@@ -72,6 +72,7 @@
       textAreaValue = document.getElementById('songText').value
       textAreaValue = textAreaValue.trim()
       textAreaValue = textAreaValue.replace(/\n/g, " ")
+      textAreaValue = textAreaValue.replace(/  /g, " ")
       console.log(textAreaValue)
 
       // url = new URL(window.location)
