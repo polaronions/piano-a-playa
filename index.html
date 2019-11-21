@@ -12,9 +12,20 @@
     }
   </style>
   <script>
-    function note(noteName) {
-      sound = new Audio(`Piano.mf.${noteName}.mp3`)
-      sound.play()
+    notes = ['C4', 'Db4', 'D4', 'Eb4', 'E4', 'F4', 'Gb4', 'G4', 'Ab4', 'A4', 'Bb4', 'B4']
+
+    noteToFile = {}
+
+    for (noteVal in notes) {
+      noteName = notes[noteVal]
+      console.log(noteName)
+
+      noteToFile[noteName] = new Audio(`Piano.mf.${noteName}.mp3`)
+    }
+
+    function playNote(noteName) {
+      noteToFile[noteName].currentTime = 0
+      noteToFile[noteName].play()
     }
 
     keyToNoteMap = {
@@ -35,14 +46,11 @@
     document.onkeydown = function(event) {
       event = event || window.event;
       if (event.key in keyToNoteMap) {
-        note(keyToNoteMap[event.key])
-        // console.log(keyToNoteMap[event.key])
+        playNote(keyToNoteMap[event.key])
       }
     }
 
-    // function pageLog(x) {
-    //   document.getElementById('pageLog').innerHTML = x + "<br />" + document.getElementById('pageLog').innerHTML
-    // }
+
 
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
@@ -51,29 +59,24 @@
     noteMsLength = 250
 
     async function playSong() {
-      // console.log('Taking a break...');
-      // await sleep(2000);
-      // console.log('Two seconds later, showing sleep in a loop...');
+
       url = new URL(window.location)
       notes = url.searchParams.get('notes')
       spaceSplit = notes.split(" ")
-      console.log(`spaceSplit = ${spaceSplit}`)
-      console.log(`spaceSplit.length = ${spaceSplit.length}`)
 
-      // window.prompt("ready to play the song?")
       await sleep(noteMsLength)
 
       while (spaceSplit.length > 0) {
         noteAndLength = spaceSplit.shift()
-        console.log(`noteAndLength = ${noteAndLength}`)
+        console.log(noteAndLength)
 
         durationMult = noteAndLength.length
-        console.log(`durationMult = ${durationMult}`)
+        // console.log(`durationMult = ${durationMult}`)
 
         noteVal = noteAndLength[0].toUpperCase() + '4'
-        console.log(`noteVal = ${noteVal}`)
+        // console.log(`noteVal = ${noteVal}`)
 
-        note(noteVal)
+        playNote(noteVal)
 
         await sleep(noteMsLength * durationMult)
       }
@@ -83,19 +86,19 @@
 
 <body>
   <svg width="483" height="360">
-    <rect onmousedown="note('C4')" fill="white" stroke="black" x="0" y="0" width="69" height="360" />
-    <rect onmousedown="note('D4')" fill="white" stroke="black" x="69" y="0" width="69" height="360" />
-    <rect onmousedown="note('E4')" fill="white" stroke="black" x="138" y="0" width="69" height="360" />
-    <rect onmousedown="note('F4')" fill="white" stroke="black" x="207" y="0" width="69" height="360" />
-    <rect onmousedown="note('G4')" fill="white" stroke="black" x="276" y="0" width="69" height="360" />
-    <rect onmousedown="note('A4')" fill="white" stroke="black" x="345" y="0" width="69" height="360" />
-    <rect onmousedown="note('B4')" fill="white" stroke="black" x="414" y="0" width="69" height="360" />
+    <rect onmousedown="playNote('C4')" fill="white" stroke="black" x="0" y="0" width="69" height="360" />
+    <rect onmousedown="playNote('D4')" fill="white" stroke="black" x="69" y="0" width="69" height="360" />
+    <rect onmousedown="playNote('E4')" fill="white" stroke="black" x="138" y="0" width="69" height="360" />
+    <rect onmousedown="playNote('F4')" fill="white" stroke="black" x="207" y="0" width="69" height="360" />
+    <rect onmousedown="playNote('G4')" fill="white" stroke="black" x="276" y="0" width="69" height="360" />
+    <rect onmousedown="playNote('A4')" fill="white" stroke="black" x="345" y="0" width="69" height="360" />
+    <rect onmousedown="playNote('B4')" fill="white" stroke="black" x="414" y="0" width="69" height="360" />
 
-    <rect onmousedown="note('Db4')" fill="black" stroke="black" x="43" y="0" width="39" height="240" />
-    <rect onmousedown="note('Eb4')" fill="black" stroke="black" x="125" y="0" width="39" height="240" />
-    <rect onmousedown="note('Gb4')" fill="black" stroke="black" x="246.75" y="0" width="39" height="240" />
-    <rect onmousedown="note('Ab4')" fill="black" stroke="black" x="324.75" y="0" width="39" height="240" />
-    <rect onmousedown="note('Bb4')" fill="black" stroke="black" x="404.25" y="0" width="39" height="240" />
+    <rect onmousedown="playNote('Db4')" fill="black" stroke="black" x="43" y="0" width="39" height="240" />
+    <rect onmousedown="playNote('Eb4')" fill="black" stroke="black" x="125" y="0" width="39" height="240" />
+    <rect onmousedown="playNote('Gb4')" fill="black" stroke="black" x="246.75" y="0" width="39" height="240" />
+    <rect onmousedown="playNote('Ab4')" fill="black" stroke="black" x="324.75" y="0" width="39" height="240" />
+    <rect onmousedown="playNote('Bb4')" fill="black" stroke="black" x="404.25" y="0" width="39" height="240" />
   </svg>
 
   <button onclick="playSong()">play song</button>
